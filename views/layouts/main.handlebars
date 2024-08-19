@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Blog</title>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            {{#if LoggedIn}}
+            <li><a href="/login">Login</a></li>
+            {{else}}
+            <li><a href="/logout">Logout</a></li>
+            {{/if}}
+        </ul>
+        <div id="blogHeading">
+            {{!-- {{#if href='/dashboard'}} --}}
+            <h1>Your Dashboard</h1>
+            {{!-- {{else}}
+            <h1>The Tech Blog</h1>
+            {{/if}}     --}}
+        </div>
+        
+    </header>
+    <main>
+        {{{body}}}
+    </main>
+    
+</body>
+</html>

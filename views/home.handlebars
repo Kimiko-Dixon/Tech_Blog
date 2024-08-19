@@ -1,0 +1,6 @@
+{{!-- <p>{{{posts}}}</p> --}}
+<div id="posts">
+    {{#each posts}}
+    <div data-postid="{{this.id}}">{{> post-format}}</div>
+    {{/each}}
+</div>
