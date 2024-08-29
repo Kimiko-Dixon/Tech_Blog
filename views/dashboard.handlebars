@@ -1,0 +1,11 @@
+<div id="my-posts">
+    {{!-- {{posts}} --}}
+    {{#each posts}}
+    <div>{{> mypost-format}}</div>
+    {{/each}}
+</div>
+<div id="new-post">
+    <button id="create-post">New Post</button>
+</div>
+
+<script src="/js/createPost.js"></script>

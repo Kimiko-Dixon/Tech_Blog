@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const { where } = require('sequelize')
 const {User, Post, Comment} = require('../../models')
 
 //create a post
@@ -7,8 +8,15 @@ router.post('/', async (req,res) => {
         const createPost = await Post.create({
             title: req.body.title,
             content: req.body.content,
-            user_id: userInfo.id
+            user_id: req.session.userInfo.id
+        },
+        {
+            include:[{model:User}]
         })
+
+        console.log(createPost)
+        // const post = createPost.map(post => post.get({plain:true}))
+        // res.render('dashboard',createPost)*
         res.status(200).json(createPost)
     }
     catch{
@@ -17,28 +25,42 @@ router.post('/', async (req,res) => {
 })
 
 //edit post
-
-//Create comment
-router.post('/comment', async (req,res) => {
+router.put('/:id',async (req,res) => {
     try{
-        const postId = await Post.getOne({
-            where:{
-                [Op.and]:{
-                    title: req.body.title,
-                    text: req.body.content
-                    
+        const editPost = await Post.update(
+            {
+                title: req.body.title,
+                content: req.body.content
+            },
+            {
+                where:{
+                    id: req.params.id
                 }
-            }
-        })
-        const createComment = await Comment.create({
-            text: req.body.text,
-            user_id: userInfo.id,
-            post_id:'?'
-        })
-        res.status(200).json(createPost)
+            } 
+        )
+        res.status(200).json(editPost)
     }
     catch{
-        res.status(500).json('failed to create post')
+        res.status(500).json('failed to edit post')
+    }
+    
+})
+//Create comment
+router.post('/comment/:id', async (req,res) => {
+    try{
+        console.log('here')
+        const createComment = await Comment.create({
+            text: req.body.text,
+            user_id: req.session.userInfo.id,
+            post_id:req.params.id
+        })
+
+        console.log(createComment)
+        // req.session.commentid = createComment.id
+        res.status(200).json(createComment)
+    }
+    catch{
+        res.status(500).json('failed to create comment')
     }
 })
 

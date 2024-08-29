@@ -20,15 +20,14 @@ router.post('/signup', async (req,res) => {
             return res.render('signup',{message: 'Your username or password has alerady been taken'})
         } */
         const newUser = await User.create(
-                userCredentials
+            userCredentials
         )
         req.session.save(() => {
             req.session.LoggedIn = true
-            const userInfo = {
+            req.session.userInfo = {
                 id:newUser.id,
                 username: newUser.username
             }
-            console.log(userInfo)
             res.status(200).json(newUser)
         }   
         )   
@@ -43,32 +42,34 @@ router.post('/signup', async (req,res) => {
 //login
 router.post('/login',async (req,res) => {
     try{
-        const user = await User.findOne({
+        const findUser = await User.findOne({
             where:{
                 username: req.body.username
             }
         })
-        if(!user){
+        console.log(findUser)
+        if(!findUser){
             res.status(400).json('Your username or Password is incorrect')
             return 
         }
-        //await not working?
-        const isvalidPassword = await user.validPassword(req.body.password)
+        const isvalidPassword = await findUser.validPassword(req.body.password)
+        console.log(isvalidPassword)
         if(!isvalidPassword){
             res.status(400).json('Your username or Password is incorrect')
             return 
         }
 
+        const user = findUser.get({plain:true})
         req.session.save(() => {
             req.session.LoggedIn = true
-            const userInfo = {
-                id:newUser.id,
-                username: newUser.username
+            req.session.userInfo = {
+                id:user.id,
+                username: user.username
             }
-            console.log(userInfo)
-            res.status(200).json(newUser)
-        }
-        )
+            console.log(req.session.userInfo.id)
+            res.status(200).json(user)
+        }   
+        ) 
 
     }
     catch{

@@ -11,23 +11,25 @@
             <li><a href="/">Home</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
             {{#if LoggedIn}}
-            <li><a href="/login">Login</a></li>
+            <li><a href="#" id="logout">Logout</a></li>
             {{else}}
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/login">Login</a></li>
             {{/if}}
         </ul>
         <div id="blogHeading">
-            {{!-- {{#if href='/dashboard'}} --}}
+            {{#if dashboard}}
             <h1>Your Dashboard</h1>
-            {{!-- {{else}}
+            {{else}}
             <h1>The Tech Blog</h1>
-            {{/if}}     --}}
+            {{/if}}     
         </div>
         
     </header>
     <main>
-        {{{body}}}
+        {{{body}}} 
     </main>
-    
+    {{#if LoggedIn}}
+        <script src="/js/logout.js"></script>
+    {{/if}}
 </body>
 </html>
