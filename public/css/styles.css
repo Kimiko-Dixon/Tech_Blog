@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+}
+li {
+    margin-right: 3%;
+}
+
+a {
+    text-decoration: none;
+    color:black
+}
+
+header {
+    background-color: #696969;
+    padding: 2%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+#sign-up-form {
+    border:solid;
+    margin:2%;
+}
+
+#login-form {
+    border:solid;
+    margin:2%;
+}
+
+input {
+    margin-bottom: 1%; ;
+}
+
+#change-to-login {
+    margin: 1%;
+}
+
+#change-to-sign-up {
+    margin: 1%;
+}
+
+#blogHeading {
+    padding-top: 2%;
+}
+
+#login {
+    padding: .5%;
+    margin-top: 1%;
+}
+
+#signup {
+    padding: .5%;
+    margin-top: 1%;
+}
+.card {
+    margin:2%;
+    border:solid;
+}
+#post-comment {
+    padding: 1%;
+}
+#postcontent {
+    padding: 1%;
+}
+.post-header {
+    display: flex;
+    justify-content: space-between;
+}
+.post-content {
+    padding: 1%;
+}
+
+#new-post-form {
+    border:solid;
+    margin:2%;
+}
+
+#new-post {
+    padding: .5%;
+    margin-top: 1%;
+}
+
+#edit-post-form {
+    border:solid;
+    margin:2%;
+}
+
+#edit-post {
+    padding: .5%;
+    margin-top: 1%;
+}
+
+#create-post {
+    padding: .5%;
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+}
+
+#create-post-button {
+    padding: 1.5%;
+}
+
+#comment-form {
+    border:solid;
+    margin:2%;
+}
+.comment-content {
+    padding: 1%;
+}
+.comment-info {
+    padding-top: 1%;
+}
