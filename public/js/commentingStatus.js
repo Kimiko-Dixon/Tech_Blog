@@ -1,5 +1,6 @@
 const commentingStatus = async (event) => {
-    event.preventDefault()
+  event.preventDefault();
+  if (event.target.dataset.loggedin === "true") {
     const id = event.target.dataset.postid;
     const response = await fetch(`/api/posts/commenting`, {
       method: "POST",
@@ -7,13 +8,15 @@ const commentingStatus = async (event) => {
     });
     if (response.status === 200) {
       document.location.replace(`/comment/${id}`);
-    } 
-    else if (response.status === 401){
-        document.location.replace(`/login`)
-    }
-    else {
+    } else {
       console.log("failed to change status");
     }
-}
+  }
+  else{
+    document.location.replace(`/login`);
+  }
+};
 
-document.querySelector("#toComment").addEventListener("click", commentingStatus);
+document
+  .querySelector("#toComment")
+  .addEventListener("click", commentingStatus);
