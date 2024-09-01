@@ -1,3 +1,4 @@
+//Creates new post with the title and the content
 const newPost = async (event) => {
   event.preventDefault();
 

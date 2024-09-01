@@ -3,11 +3,6 @@
     {{#if commenting}}
         {{> createComment}}
     {{else}}
-    {{!-- {{#if LoggedIn}}
-        <div id="commentbuttondiv">
-            <button type="submit" id="toComment" data-postid="{{post.id}}">Comment</button>    
-        </div>
-    {{/if}}     --}}
     <div id="commentbuttondiv">
             <button type="submit" id="toComment" data-postid="{{post.id}}" {{#if LoggedIn}}data-loggedin="true"{{else}}data-loggedin="false"{{/if}}>Comment</button>    
         </div>

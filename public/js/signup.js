@@ -1,3 +1,4 @@
+//Signup with entered username and password
 const signup = async (event) => {
   event.preventDefault();
 

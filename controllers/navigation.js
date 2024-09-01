@@ -2,6 +2,7 @@ const router = require("express").Router();
 const ifLoggedIn = require("../utils/middleware");
 const { User, Post, Comment } = require("../models");
 
+//Home route
 router.get("/", async (req, res) => {
   try {
     console.log(req.session.LoggedIn)
@@ -20,6 +21,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Dashboard route
 router.get("/dashboard", ifLoggedIn, async (req, res) => {
     try {
       req.session.commenting = false
@@ -43,11 +45,13 @@ router.get("/dashboard", ifLoggedIn, async (req, res) => {
   }
 );
 
+//Create new post route
 router.get("/newPost",ifLoggedIn,async (req, res) => {
   req.session.commenting = false
     res.render("newPost");
 });
 
+//Edit post route
 router.get("/editPost/:id",ifLoggedIn,async (req, res) => {
     req.session.commenting = false
     const editPost = await Post.findByPk(req.params.id)
@@ -57,6 +61,7 @@ router.get("/editPost/:id",ifLoggedIn,async (req, res) => {
     res.render("editPost",{post:post,LoggedIn:req.session.LoggedIn});
 });
 
+//comment route
 router.get('/comment/:id',async (req,res) => {
   console.log(req.session.LoggedIn)
   const commentOn = await Post.findByPk(req.params.id,{
@@ -69,6 +74,7 @@ router.get('/comment/:id',async (req,res) => {
     res.render("comment",{post:post,LoggedIn:req.session.LoggedIn,commenting:req.session.commenting});
 })
 
+//Login Route
 router.get("/login", async (req, res) => {
   if (req.session.LoggedIn) {
     res.redirect("/");
@@ -77,6 +83,7 @@ router.get("/login", async (req, res) => {
   res.render("login",{LoggedIn:req.session.LoggedIn});
 });
 
+//Signup route
 router.get("/signup", async (req, res) => {
     if (req.session.LoggedIn) {
       res.redirect("/");

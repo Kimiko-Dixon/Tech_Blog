@@ -1,3 +1,4 @@
+//Edit post title, content, or both
 const editPost = async (event) => {
   event.preventDefault();
 
@@ -20,6 +21,7 @@ const editPost = async (event) => {
   }
 };
 
+//Delete post given the id
 const deletePost = async (event) => {
   event.preventDefault();
   const id = event.target.dataset.postid;

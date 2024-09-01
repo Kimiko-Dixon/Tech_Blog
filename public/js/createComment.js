@@ -1,3 +1,4 @@
+//Creates comment with the comment text and the id of the post the comment is on
 const createComment = async (event) => {
   event.preventDefault();
   const text = document.querySelector("#comment").value.trim();

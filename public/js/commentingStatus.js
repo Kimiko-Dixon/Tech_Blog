@@ -1,3 +1,4 @@
+//Gets logged in status and either changes commenting status to true or directs the user to the login page
 const commentingStatus = async (event) => {
   event.preventDefault();
   if (event.target.dataset.loggedin === "true") {

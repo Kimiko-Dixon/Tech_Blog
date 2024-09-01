@@ -1,3 +1,4 @@
+//login with username and password
 const login = async (event) => {
   event.preventDefault();
 

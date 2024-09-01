@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {User, Post, Comment} = require('../../models')
 
-//create a post
+//Create a post
 router.post('/', async (req,res) => {
     try{
         const createPost = await Post.create({
@@ -14,8 +14,6 @@ router.post('/', async (req,res) => {
         })
 
         console.log(createPost)
-        // const post = createPost.map(post => post.get({plain:true}))
-        // res.render('dashboard',createPost)*
         res.status(200).json(createPost)
     }
     catch{
@@ -23,7 +21,7 @@ router.post('/', async (req,res) => {
     }
 })
 
-//edit post
+//Edit post
 router.put('/:id',async (req,res) => {
     try{
         const editPost = await Post.update(
@@ -48,14 +46,6 @@ router.put('/:id',async (req,res) => {
 //Change commenting status
 router.post('/commenting', async (req,res) => {
     try{
-        /* if (req.session.LoggedIn){
-           req.session.commenting = true
-           res.status(200).json('status changed')
-        }
-        else{
-            res.status(401).json('User must login')
-        }  */
-
       req.session.commenting = true
       res.status(200).json('status changed')
     }

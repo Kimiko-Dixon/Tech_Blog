@@ -8,17 +8,7 @@ router.post('/signup', async (req,res) => {
             username: req.body.username,
             password: req.body.password
         }
-       /*  const findCreds = await User.findAll({
-            where:{
-                [Op.or]:{
-                   username:userCredentials.username, 
-                   password: userCredentials.password
-                }
-            }
-        })
-        if(findCreds){
-            return res.render('signup',{message: 'Your username or password has alerady been taken'})
-        } */
+
         const newUser = await User.create(
             userCredentials
         )
