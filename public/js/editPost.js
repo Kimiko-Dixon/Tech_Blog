@@ -20,4 +20,20 @@ const editPost = async (event) => {
   }
 };
 
+const deletePost = async (event) => {
+  event.preventDefault();
+  const id = event.target.dataset.postid;
+    const response = await fetch(`/api/posts/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.status === 200) {
+      document.location.replace("/dashboard");
+    } else {
+      console.log("failed to delete post");
+    }
+}
+
 document.querySelector("#edit-post").addEventListener("click", editPost);
+document.querySelector("#delete-post").addEventListener("click", deletePost);

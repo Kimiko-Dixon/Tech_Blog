@@ -122,3 +122,14 @@ input {
 .comment-info {
     padding-top: 1%;
 }
+#delete-post {
+    padding: .5%;
+    margin-top: 1%;
+}
+#toComment {
+    padding: .5%;
+}
+#commentbuttondiv {
+    display: flex;
+    justify-content: center;
+}

@@ -9,13 +9,12 @@ const createComment = async (event) => {
       headers: { "Content-Type": "application/json" },
     });
     if (response.status === 200) {
-      document.location.replace(`/commented/${id}`);
+      document.location.replace(`/comment/${id}`);
     } else {
-      console.log("failed to edit post");
+      console.log("failed to create comment");
     }
   }
 };
 
-document
-  .querySelector("#comment-button")
-  .addEventListener("click", createComment);
+document.querySelector("#comment-button").addEventListener("click", createComment);
+

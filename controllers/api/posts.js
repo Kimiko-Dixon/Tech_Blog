@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const { where } = require('sequelize')
 const {User, Post, Comment} = require('../../models')
 
 //create a post
@@ -45,6 +44,25 @@ router.put('/:id',async (req,res) => {
     }
     
 })
+
+//Change commenting status
+router.post('/commenting', async (req,res) => {
+    try{
+        /* if (req.session.LoggedIn){
+           req.session.commenting = true
+           res.status(200).json('status changed')
+        }
+        else{
+            res.status(401).json('User must login')
+        }  */
+
+      req.session.commenting = true
+      res.status(200).json('status changed')
+    }
+    catch{
+        res.status(500).json('failed to change status')
+    }
+})
 //Create comment
 router.post('/comment/:id', async (req,res) => {
     try{
@@ -56,12 +74,30 @@ router.post('/comment/:id', async (req,res) => {
         })
 
         console.log(createComment)
-        // req.session.commentid = createComment.id
+        req.session.commenting = false
         res.status(200).json(createComment)
     }
     catch{
         res.status(500).json('failed to create comment')
     }
+})
+
+//delete post
+router.delete('/:id',async (req,res) => {
+    try{
+        const deletePost = await Post.destroy(
+            {
+                where:{
+                    id: req.params.id
+                }
+            } 
+        )
+        res.status(200).json(deletePost)
+    }
+    catch{
+        res.status(500).json('failed to delete post')
+    }
+    
 })
 
 module.exports = router

@@ -1,6 +1,21 @@
 <div id="comment-on-post">
     {{> comment-post-format}}
-    {{> createComment}}
+    {{#if commenting}}
+        {{> createComment}}
+    {{else}}
+    {{#if LoggedIn}}
+        <div id="commentbuttondiv">
+            <button type="submit" id="toComment" data-postid="{{post.id}}">Comment</button>    
+        </div>
+    {{/if}}    
+        {{#each post.comments}}
+            {{> commented}}
+        {{/each}}
+    {{/if}}
 </div>
 
-<script src="/js/createComment.js"></script>
+{{#if commenting}}
+    <script src="/js/createComment.js"></script>
+{{else}}
+    <script src="/js/commentingStatus.js"></script>
+{{/if}}

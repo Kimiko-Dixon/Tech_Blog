@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const ifLoggedIn = require("../utils/middleware");
 const { User, Post, Comment } = require("../models");
-const { userInfo } = require("os");
 
 router.get("/", async (req, res) => {
   try {
+    console.log(req.session.LoggedIn)
+    req.session.commenting = false
     const posted = await Post.findAll({
       order: ["date"],
       include: [{ model: User }],
@@ -21,6 +22,7 @@ router.get("/", async (req, res) => {
 
 router.get("/dashboard", ifLoggedIn, async (req, res) => {
     try {
+      req.session.commenting = false
         console.log(req.session.LoggedIn)
       const userPosted = await Post.findAll({
         where: {
@@ -42,11 +44,12 @@ router.get("/dashboard", ifLoggedIn, async (req, res) => {
 );
 
 router.get("/newPost",ifLoggedIn,async (req, res) => {
+  req.session.commenting = false
     res.render("newPost");
 });
 
 router.get("/editPost/:id",ifLoggedIn,async (req, res) => {
-    // req.session.post_id = req.params.id
+    req.session.commenting = false
     const editPost = await Post.findByPk(req.params.id)
     
     const post = editPost.get({plain:true})
@@ -54,35 +57,16 @@ router.get("/editPost/:id",ifLoggedIn,async (req, res) => {
     res.render("editPost",{post:post,LoggedIn:req.session.LoggedIn});
 });
 
-router.get('/comment/:id',ifLoggedIn,async (req,res) => {
+router.get('/comment/:id',async (req,res) => {
+  console.log(req.session.LoggedIn)
   const commentOn = await Post.findByPk(req.params.id,{
-    include: [{ model: User }]
-  })
-
-  const post = commentOn.get({plain:true})
-    
-    res.render("comment",{post:post,LoggedIn:req.session.LoggedIn});
-})
-
-router.get('/commented/:id',ifLoggedIn,async (req,res) => {
-  const commentedOn = await Post.findByPk(req.params.id,{
+    //Help from TA
     include:[{model:Comment,include:[User]},{ model: User }]
   })
-
-  const post = commentedOn.get({plain:true})
-
-  /* const postComments = await Comment.findAll({
-    include:[{ model: User }],
-    where:{
-      post_id:req.params.id
-    }
-  }) */
-
- /*  const comments = postComments.map(c => c.get({plain:true})) */
   
-  console.log(post)  
-  console.log(post.comments[0].user)
-  res.render("comment-done",{post:post,LoggedIn:req.session.LoggedIn});
+  const post = commentOn.get({plain:true})
+    
+    res.render("comment",{post:post,LoggedIn:req.session.LoggedIn,commenting:req.session.commenting});
 })
 
 router.get("/login", async (req, res) => {
