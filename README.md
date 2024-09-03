@@ -26,7 +26,7 @@ To use this application, click "login" in the navigation. You will then be taken
 ![post deleted](./images/post-deleted.PNG)
 ![Individual post and comments](./images/post-and-comments.PNG)
 ![Create comment](./images/create-comment.PNG)
-[Deployed Application]()
+[Deployed Application](https://tech-blog-5ccm.onrender.com)
 ## Credits
 
 TA: getting comment information to display
